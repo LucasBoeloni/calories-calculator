@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+				   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+	<changeSet author="lucas" id="20260306-3-1">
+		<createTable tableName="meal">
+			<column name="id" type="bigint">
+				<constraints nullable="false"></constraints>
+			</column>
+			<column name="name" type="varchar(500)">
+				<constraints nullable="false"></constraints>
+			</column>
+			<column name="id_user" type="bigint">
+				<constraints nullable="false"></constraints>
+			</column>
+			<column name="deleted" type="boolean">
+				<constraints nullable="false"></constraints>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet author="lucas" id="20260306-3-2">
+		<createSequence sequenceName="sequence_meal"
+						dataType="bigint"
+						startValue="1"
+						incrementBy="1"></createSequence>
+	</changeSet>
+
+	<changeSet author="lucas" id="20260306-3-3" >
+		<addPrimaryKey tableName="meal" columnNames="id" constraintName="pk_meal"/>
+	</changeSet>
+
+	<changeSet author="lucas" id="20260306-3-4" >
+		<addForeignKeyConstraint baseTableName="meal" baseColumnNames="id_user"
+								 referencedTableName="user" referencedColumnNames="id"
+								 constraintName="fk_meal_user"/>
+	</changeSet>
+
+</databaseChangeLog>

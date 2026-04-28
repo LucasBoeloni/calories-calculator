@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+				   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+	<changeSet author="lucas" id="20260306-1-1">
+		<createTable tableName="food">
+			<column name="id" type="bigint">
+				<constraints nullable="false"></constraints>
+			</column>
+			<column name="name" type="varchar(200)">
+				<constraints nullable="false"></constraints>
+			</column>
+			<column name="calorie" type="double precision">
+				<constraints nullable="false"></constraints>
+			</column>
+			<column name="carbohydrate" type="double precision">
+				<constraints nullable="false"></constraints>
+			</column>
+			<column name="sugar" type="double precision">
+				<constraints nullable="false"></constraints>
+			</column>
+			<column name="protein" type="double precision">
+				<constraints nullable="false"></constraints>
+			</column>
+			<column name="fat" type="double precision">
+				<constraints nullable="false"></constraints>
+			</column>
+			<column name="fiber" type="double precision">
+				<constraints nullable="false"></constraints>
+			</column>
+			<column name="sodium" type="double precision">
+				<constraints nullable="false"></constraints>
+			</column>
+			<column name="deleted" type="boolean">
+				<constraints nullable="false"></constraints>
+			</column>
+
+		</createTable>
+	</changeSet>
+
+	<changeSet author="lucas" id="20260306-1-2">
+		<createSequence sequenceName="sequence_food"
+						dataType="bigint"
+						startValue="1"
+						incrementBy="1"></createSequence>
+	</changeSet>
+
+	<changeSet author="lucas" id="20260306-1-3" >
+		<addPrimaryKey tableName="food" columnNames="id" constraintName="pk_food"/>
+	</changeSet>
+
+
+
+</databaseChangeLog>

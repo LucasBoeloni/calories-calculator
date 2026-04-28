@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+				   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+	<changeSet author="lucas" id="20260306-4-1">
+		<createTable tableName="meal_food">
+			<column name="id_meal" type="bigint">
+				<constraints nullable="false"></constraints>
+			</column>
+			<column name="id_food" type="bigint">
+				<constraints nullable="false"></constraints>
+			</column>
+			<column name="unit" type="int">
+				<constraints nullable="false"></constraints>
+			</column>
+			<column name="quantity" type="double precision">
+				<constraints nullable="false"></constraints>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet author="lucas" id="20260306-4-2" >
+		<addForeignKeyConstraint baseTableName="meal_food" baseColumnNames="id_meal"
+								 referencedTableName="meal" referencedColumnNames="id"
+								 constraintName="fk_meal_food_meal"/>
+	</changeSet>
+
+	<changeSet author="lucas" id="20260306-4-3" >
+		<addForeignKeyConstraint baseTableName="meal_food" baseColumnNames="id_food"
+								 referencedTableName="food" referencedColumnNames="id"
+								 constraintName="fk_meal_food_food"/>
+	</changeSet>
+	<changeSet author="lucas" id="20260306-4-4">
+		<addPrimaryKey tableName="meal_food" columnNames="id_meal, id_food" constraintName="pk_meal_food"/>
+	</changeSet>
+
+</databaseChangeLog>
