@@ -1,0 +1,9 @@
+<mat-dialog-content>
+      <app-ingredients-card (newIngredient)="catchNewIngredient($event)" />
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button matButton [mat-dialog-close]="null">Cancelar</button>
+  <button matButton [mat-dialog-close]="newIngredient" cdkFocusInitial>Salvar</button>
+</mat-dialog-actions>
+
+

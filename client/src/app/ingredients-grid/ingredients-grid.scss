@@ -1,0 +1,20 @@
+.ingredients-container{
+  display: grid;
+  gap: 1rem;
+}
+
+.search-field {
+  display: block;
+  width: 95%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.search-line{
+  display: flex;
+  justify-content: space-between;
+}

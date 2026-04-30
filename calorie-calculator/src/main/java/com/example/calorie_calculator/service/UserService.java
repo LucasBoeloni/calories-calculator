@@ -22,7 +22,7 @@ public class UserService {
 
 
 	public List<UserDto> findAll() {
-		return mapper.toDto(repository.findAllByDeletedIsFalse());
+		return mapper.toDto(repository.findAll());
 	}
 
 	public UserDto findById(Long id){
@@ -30,7 +30,7 @@ public class UserService {
 	}
 
 	private User findEntityById(Long id) {
-		return repository.findByIdAndDeletedIsFalse(id)
+		return repository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException("not found"));
 	}
 

@@ -1,0 +1,23 @@
+<mat-toolbar class="main-header">
+  <span class="branding">Dietinha</span>
+  <button matTooltip="Sua dieta" matIconButton aria-label="diet">
+    <mat-icon>text_snippet</mat-icon>
+  </button>
+  <button matTooltip="ingredientes" matIconButton aria-label="ingredients">
+    <mat-icon>shopping_basket</mat-icon>
+  </button>
+  <span class="spacer"></span>
+
+  @if(isLoading()){
+      <mat-spinner diameter="30" ></mat-spinner>
+  }@else {
+<mat-form-field>
+    <mat-select>
+      @for (user of users(); track user) {
+        <mat-option [value]="user.id">{{ user.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  }
+
+</mat-toolbar>
