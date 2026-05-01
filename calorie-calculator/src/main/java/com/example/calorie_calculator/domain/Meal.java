@@ -1,11 +1,14 @@
 package com.example.calorie_calculator.domain;
 
+import com.example.calorie_calculator.service.dto.IngredientDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "meal")
@@ -24,8 +27,11 @@ public class Meal implements Serializable {
 	@JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
 	private User user;
 
-	@Column(name = "calorie", nullable = false)
-	private Double calorie;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "meal")
+	private List<MealIngredient> ingredients;
+
+	@Column(name = "name")
+	private String name;
 
 	@Column(name = "deleted", nullable = false)
 	private Boolean deleted = Boolean.FALSE;

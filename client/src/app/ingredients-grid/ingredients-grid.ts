@@ -10,7 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { IngredientsDialog } from './ingredients-dialog';
+import { IngredientsDialog } from './ingredients-dialog/ingredients-dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-ingredients-grid',
@@ -23,6 +24,7 @@ import { IngredientsDialog } from './ingredients-dialog';
     MatIconModule,
     MatTooltipModule,
     MatDialogModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './ingredients-grid.html',
   styleUrl: './ingredients-grid.scss',

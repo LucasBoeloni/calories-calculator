@@ -1,3 +1,4 @@
+
 <div class="ingredients-container">
   <div class="search-line" >
     <mat-form-field appearance="outline" class="search-field">
@@ -10,6 +11,9 @@
   </div>
 
   <div class="grid">
+      @if(isLoading()){
+      <mat-spinner></mat-spinner>
+  }
     @for (ingredient of filteredIngredients(); track ingredient.id) {
       <app-ingredients-card [ingredient]="ingredient" />
     }

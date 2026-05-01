@@ -8,6 +8,7 @@ import { User } from '../user/user';
 import { finalize } from 'rxjs';
 import { UserModel } from '../user/user.model';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -19,6 +20,7 @@ export class Header implements OnInit {
   protected service = inject(User);
   protected users = signal<UserModel[]>([]);
   protected isLoading = signal(false);
+  private router = inject(Router)
 
   ngOnInit(): void {
     this.isLoading.set(true);
@@ -31,5 +33,9 @@ export class Header implements OnInit {
           this.isLoading.set(false);
         },
       });
+  }
+
+  navigate(route: string){
+    this.router.navigate([route])
   }
 }

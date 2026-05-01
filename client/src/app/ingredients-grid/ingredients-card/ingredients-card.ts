@@ -43,7 +43,7 @@ export class IngredientsCard implements OnInit {
         .pipe(debounceTime(2000), distinctUntilChanged())
         .subscribe((e) => {
           this.service
-            .update(this.formGroup.getRawValue())
+            .create(this.formGroup.getRawValue())
             .pipe(finalize(() => {}))
             .subscribe({
               next: (value) => {},

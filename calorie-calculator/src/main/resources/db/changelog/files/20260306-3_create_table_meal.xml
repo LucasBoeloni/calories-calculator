@@ -9,7 +9,7 @@
 				<constraints nullable="false"></constraints>
 			</column>
 			<column name="name" type="varchar(500)">
-				<constraints nullable="false"></constraints>
+				<constraints nullable="true"></constraints>
 			</column>
 			<column name="id_user" type="bigint">
 				<constraints nullable="false"></constraints>

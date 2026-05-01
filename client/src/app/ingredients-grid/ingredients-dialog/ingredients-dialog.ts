@@ -1,8 +1,8 @@
 import { Component, computed, signal, inject, OnInit, ChangeDetectionStrategy, output } from '@angular/core';
-import { IngredientsCard } from './ingredients-card/ingredients-card';
+import { IngredientsCard } from '../ingredients-card/ingredients-card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { Ingredient } from './ingredient';
+import { Ingredient } from '../ingredient';
 
 @Component({
   selector: 'ingredients-dialog',

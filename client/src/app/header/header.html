@@ -1,9 +1,9 @@
 <mat-toolbar class="main-header">
   <span class="branding">Dietinha</span>
-  <button matTooltip="Sua dieta" matIconButton aria-label="diet">
+  <button matTooltip="Sua dieta" matIconButton aria-label="diet" (click)="navigate('meal-grid')">
     <mat-icon>text_snippet</mat-icon>
   </button>
-  <button matTooltip="ingredientes" matIconButton aria-label="ingredients">
+  <button matTooltip="ingredientes" matIconButton aria-label="ingredients" (click)="navigate('ingredient-grid')">
     <mat-icon>shopping_basket</mat-icon>
   </button>
   <span class="spacer"></span>

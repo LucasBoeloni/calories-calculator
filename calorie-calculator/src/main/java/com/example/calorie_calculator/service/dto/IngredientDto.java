@@ -1,6 +1,5 @@
 package com.example.calorie_calculator.service.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +11,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FoodDto implements Serializable {
+public class IngredientDto implements Serializable {
 
 	private Long id;
 

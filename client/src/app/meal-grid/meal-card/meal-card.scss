@@ -1,16 +1,15 @@
-.ingredient-card {
-  height: 100%;
+.meal-card {
   display: flex;
   flex-direction: column;
-
-
+  box-shadow: 0 1px 8px rgba($color: #444444, $alpha: 1.0);
+  margin: 1%;
 }
 
 mat-card-content {
   flex: 1;
 }
 
-.ingredient-card-form-line {
+.header {
   display: flex;
   justify-content: space-between;
   height: 30px;
@@ -21,5 +20,13 @@ mat-card-content {
 .ingredients-form-field {
   width: 30%;
   height: 60%;
+  font-size: small;
+}
+
+table td {
+  font-size: small;
+}
+
+table th {
   font-size: small;
 }

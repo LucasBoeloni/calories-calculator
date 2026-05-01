@@ -3,6 +3,7 @@ package com.example.calorie_calculator.controller;
 
 import com.example.calorie_calculator.service.MealService;
 import com.example.calorie_calculator.service.dto.MealDto;
+import com.example.calorie_calculator.service.dto.MealIngredientMealDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +25,9 @@ public class MealController {
 
 	private final MealService service;
 
-	@GetMapping
-	public ResponseEntity<List<MealDto>> findAll() {
-		return ResponseEntity.ok(service.findAll());
+	@GetMapping("/from-user/{userId}")
+	public ResponseEntity<List<MealIngredientMealDto>> findAllMealIngredientFromUser(@PathVariable Long userId) {
+		return ResponseEntity.ok(service.findAllMealIngredientFromUser(userId));
 	}
 
 	@GetMapping("/{id}")
@@ -35,13 +36,8 @@ public class MealController {
 	}
 
 	@PostMapping
-	public ResponseEntity<MealDto> create(@RequestBody MealDto dto) {
+	public ResponseEntity<MealIngredientMealDto> create(@RequestBody MealIngredientMealDto dto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(service.save(dto));
-	}
-	
-	@PutMapping
-	public ResponseEntity<MealDto> update(@RequestBody MealDto dto) {
-		return ResponseEntity.ok(service.update(dto));
 	}
 
 	@DeleteMapping("/{id}")

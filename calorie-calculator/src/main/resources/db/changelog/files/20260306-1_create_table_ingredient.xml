@@ -4,7 +4,7 @@
 				   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
 
 	<changeSet author="lucas" id="20260306-1-1">
-		<createTable tableName="food">
+		<createTable tableName="ingredient">
 			<column name="id" type="bigint">
 				<constraints nullable="false"></constraints>
 			</column>
@@ -40,14 +40,14 @@
 	</changeSet>
 
 	<changeSet author="lucas" id="20260306-1-2">
-		<createSequence sequenceName="sequence_food"
+		<createSequence sequenceName="sequence_ingredient"
 						dataType="bigint"
 						startValue="1"
 						incrementBy="1"></createSequence>
 	</changeSet>
 
 	<changeSet author="lucas" id="20260306-1-3" >
-		<addPrimaryKey tableName="food" columnNames="id" constraintName="pk_food"/>
+		<addPrimaryKey tableName="ingredient" columnNames="id" constraintName="pk_ingredient"/>
 	</changeSet>
 
 

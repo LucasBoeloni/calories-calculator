@@ -8,15 +8,15 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "food")
+@Table(name = "ingredient")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Food implements Serializable {
+public class Ingredient implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_food")
-	@SequenceGenerator(name = "sequence_food", sequenceName = "sequence_food", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_ingredient")
+	@SequenceGenerator(name = "sequence_ingredient", sequenceName = "sequence_ingredient", allocationSize = 1)
 	@Column(name = "id", nullable = false)
 	private Long id;
 

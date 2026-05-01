@@ -1,8 +1,8 @@
 package com.example.calorie_calculator.controller;
 
 
-import com.example.calorie_calculator.service.FoodService;
-import com.example.calorie_calculator.service.dto.FoodDto;
+import com.example.calorie_calculator.service.IngredientService;
+import com.example.calorie_calculator.service.dto.IngredientDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,30 +11,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/food")
+@RequestMapping("/api/ingredient")
 @RequiredArgsConstructor
-public class FoodController {
+public class IngredientController {
 
-	private final FoodService service;
+	private final IngredientService service;
 
 	@GetMapping
-	public ResponseEntity<List<FoodDto>> findAll() {
+	public ResponseEntity<List<IngredientDto>> findAll() {
 		return ResponseEntity.ok(service.findAll());
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<FoodDto> findById(@PathVariable Long id) {
+	public ResponseEntity<IngredientDto> findById(@PathVariable Long id) {
 		return ResponseEntity.ok(service.findById(id));
 	}
 
 	@PostMapping
-	public ResponseEntity<FoodDto> create(@RequestBody FoodDto dto) {
+	public ResponseEntity<IngredientDto> create(@RequestBody IngredientDto dto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(service.save(dto));
-	}
-	
-	@PutMapping
-	public ResponseEntity<FoodDto> update(@RequestBody FoodDto dto) {
-		return ResponseEntity.ok(service.update(dto));
 	}
 
 	@DeleteMapping("/{id}")

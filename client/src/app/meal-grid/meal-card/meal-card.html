@@ -1,0 +1,109 @@
+<mat-card class="meal-card">
+  <mat-card-content>
+    <table mat-table [dataSource]="meal().ingredients" class="mat-elevation-z8 demo-table">
+      <tr>
+        <th>test</th>
+      </tr>
+
+      <ng-container matColumnDef="name">
+        <th style="width: 20%" mat-header-cell *matHeaderCellDef>Ingredientes</th>
+        <td style="width: 20%" mat-cell *matCellDef="let ingredient">{{ ingredient.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="quantity">
+        <th style="width: 5%" mat-header-cell *matHeaderCellDef>Quantidade</th>
+        <td style="width: 5%" mat-cell *matCellDef="let ingredient">
+          {{ ingredient.quantity + (ingredient.unit == 1 ? 'g' : 'un') }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="calorie">
+        <th style="width: 5%" mat-header-cell *matHeaderCellDef>Calorias</th>
+        <td style="width: 5%" mat-cell *matCellDef="let ingredient">
+          {{ formatColumnValue(ingredient.calorie, ingredient.quantity) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="protein">
+        <th style="width: 5%" mat-header-cell *matHeaderCellDef>Proteinas</th>
+        <td style="width: 5%" mat-cell *matCellDef="let ingredient">
+          {{ formatColumnValue(ingredient.protein, ingredient.quantity) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="carbohydrate">
+        <th style="width: 5%" mat-header-cell *matHeaderCellDef>Carbohidratos</th>
+        <td style="width: 5%" mat-cell *matCellDef="let ingredient">
+          {{ formatColumnValue(ingredient.carbohydrate, ingredient.quantity) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="sugar">
+        <th style="width: 5%" mat-header-cell *matHeaderCellDef>Açucares</th>
+        <td style="width: 5%" mat-cell *matCellDef="let ingredient">
+          {{ formatColumnValue(ingredient.sugar, ingredient.quantity) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="fat">
+        <th style="width: 5%" mat-header-cell *matHeaderCellDef>Gorduras</th>
+        <td style="width: 5%" mat-cell *matCellDef="let ingredient">
+          {{ formatColumnValue(ingredient.fat, ingredient.quantity) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="fiber">
+        <th style="width: 5%" mat-header-cell *matHeaderCellDef>Fibras</th>
+        <td style="width: 5%" mat-cell *matCellDef="let ingredient">
+          {{ formatColumnValue(ingredient.fiber, ingredient.quantity) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="sodium">
+        <th style="width: 5%" mat-header-cell *matHeaderCellDef>Sódio</th>
+        <td style="width: 5%" mat-cell *matCellDef="let ingredient">
+          {{ formatColumnValue(ingredient.sodium, ingredient.quantity) }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="dummy">
+        <th style="width: 20%" mat-header-cell *matHeaderCellDef>{{meal().name}}</th>
+      </ng-container>
+      <ng-container matColumnDef="dummy2">
+        <th style="width: 5%" mat-header-cell *matHeaderCellDef> Totais :</th>
+      </ng-container>
+      <ng-container matColumnDef="calorieTotal">
+        <th style="width: 5%" mat-header-cell *matHeaderCellDef>{{ getTotalColumn('calorie') }}</th>
+      </ng-container>
+
+      <ng-container matColumnDef="proteinTotal">
+        <th style="width: 5%" mat-header-cell *matHeaderCellDef>{{ getTotalColumn('protein') }}</th>
+      </ng-container>
+
+      <ng-container matColumnDef="carbohydrateTotal">
+        <th style="width: 5%" mat-header-cell *matHeaderCellDef>
+          {{ getTotalColumn('carbohydrate') }}
+        </th>
+      </ng-container>
+
+      <ng-container matColumnDef="sugarTotal">
+        <th style="width: 5%" mat-header-cell *matHeaderCellDef>{{ getTotalColumn('sugar') }}</th>
+      </ng-container>
+
+      <ng-container matColumnDef="fatTotal">
+        <th style="width: 5%" mat-header-cell *matHeaderCellDef>{{ getTotalColumn('fat') }}</th>
+      </ng-container>
+
+      <ng-container matColumnDef="fiberTotal">
+        <th style="width: 5%" mat-header-cell *matHeaderCellDef>{{ getTotalColumn('fiber') }}</th>
+      </ng-container>
+
+      <ng-container matColumnDef="sodiumTotal">
+        <th style="width: 5%" mat-header-cell *matHeaderCellDef>{{ getTotalColumn('sodium') }}</th>
+      </ng-container>
+
+      <tr style="background-color: #000000;" mat-header-row noDa *matHeaderRowDef="displayedTotalColumns"></tr>
+      <tr mat-header-row noDa *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>

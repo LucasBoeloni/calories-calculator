@@ -1,26 +1,22 @@
 package com.example.calorie_calculator.service.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MealDto implements Serializable {
+public class MealIngredientMealDto implements Serializable {
 
-	private Long id;
-
+	private Long mealId;
 	private Long userId;
-
 	private String name;
-
-	private Boolean deleted = Boolean.FALSE;
-
+	private List<MealIngredientIngredientDto> ingredients;
 
 }
