@@ -1,5 +1,6 @@
 export interface Ingredient {
   id : number;
+  unit : number;
   name : string;
   calorie : number;
   carbohydrate : number;
@@ -9,5 +10,4 @@ export interface Ingredient {
   fiber : number;
   sodium : number;
   deleted: boolean;
-
 }

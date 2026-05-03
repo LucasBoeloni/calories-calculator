@@ -11,9 +11,6 @@
 			<column name="id_ingredient" type="bigint">
 				<constraints nullable="false"></constraints>
 			</column>
-			<column name="unit" type="int">
-				<constraints nullable="false"></constraints>
-			</column>
 			<column name="quantity" type="double precision">
 				<constraints nullable="false"></constraints>
 			</column>

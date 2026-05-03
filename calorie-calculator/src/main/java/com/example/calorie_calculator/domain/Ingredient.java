@@ -20,6 +20,9 @@ public class Ingredient implements Serializable {
 	@Column(name = "id", nullable = false)
 	private Long id;
 
+	@Column(name = "unit")
+	private Integer unit;
+
 	@Column(name = "name", nullable = false)
 	private String name;
 

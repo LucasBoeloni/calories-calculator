@@ -1,7 +1,7 @@
 .meal-card {
   display: flex;
   flex-direction: column;
-  box-shadow: 0 1px 8px rgba($color: #444444, $alpha: 1.0);
+  box-shadow: 0 1px 8px rgba($color: #444444, $alpha: 1);
   margin: 1%;
 }
 
@@ -11,10 +11,16 @@ mat-card-content {
 
 .header {
   display: flex;
-  justify-content: space-between;
-  height: 30px;
-  align-items: center;
+  background-color: #161616;
+  align-items: baseline;
+  line-height: 250%;
+}
 
+.total-header {
+  display: flex;
+  background-color: #000000;
+  align-items: baseline;
+  line-height: 250%;
 }
 
 .ingredients-form-field {

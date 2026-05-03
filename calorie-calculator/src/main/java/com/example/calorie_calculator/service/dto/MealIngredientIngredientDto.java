@@ -21,7 +21,7 @@ public class MealIngredientIngredientDto implements Serializable {
 
 	private Double quantity;
 
-	private int unit;
+	private Integer unit;
 
 	private String name;
 

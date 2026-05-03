@@ -4,9 +4,11 @@
     }
   <div class="grid">
   @for (meal of meals(); track meal.mealId) {
-    <app-meal-card [meal]="meal" />
+    <app-meal-card [meal]="meal" (mealChange)="onMealChange($event)" [(ingredients)]="ingredients" />
   }
-
+        <button (click)="pushNewMeal()" matTooltip="Sua dieta" matIconButton aria-label="diet">
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
 
   </mat-card>

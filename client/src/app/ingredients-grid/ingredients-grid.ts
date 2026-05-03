@@ -1,4 +1,11 @@
-import { Component, computed, signal, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  computed,
+  signal,
+  inject,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { IngredientsCard } from './ingredients-card/ingredients-card';
 import { Ingredient } from './ingredient';
 import { MatInputModule } from '@angular/material/input';
@@ -24,7 +31,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatIconModule,
     MatTooltipModule,
     MatDialogModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
   templateUrl: './ingredients-grid.html',
   styleUrl: './ingredients-grid.scss',
@@ -40,14 +47,13 @@ export class IngredientsGrid implements OnInit {
 
   readonly dialog = inject(MatDialog);
 
-
   protected filteredIngredients = computed(() => {
-    const term = this.searchTerm().toLocaleLowerCase().trim();
-    if (!term) return this.ingredients();
+      const term = this.searchTerm().toLocaleLowerCase().trim();
+      if (!term) return this.ingredients();
 
-    return this.ingredients().filter((ingredient) =>
-      ingredient.name.toLocaleLowerCase().includes(term),
-    );
+      return this.ingredients().filter((ingredient) =>
+        ingredient.name.toLocaleLowerCase().includes(term),
+      );
   });
 
   protected clear() {
@@ -60,10 +66,10 @@ export class IngredientsGrid implements OnInit {
 
   ngOnInit(): void {
     this.isLoading.set(true);
-this.getlAllIngredients();
+    this.getlAllIngredients();
   }
 
-  private getlAllIngredients(){
+  private getlAllIngredients() {
     this.service
       .getAll()
       .pipe(finalize(() => {}))
@@ -78,19 +84,18 @@ this.getlAllIngredients();
   openDialog() {
     const dialogRef = this.dialog.open(IngredientsDialog);
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(!!result){
-            this.service
-      .create(result)
-      .pipe(finalize(() => {}))
-      .subscribe({
-        next: (value) => {
-          this.isLoading.set(false);
-          this.getlAllIngredients();
-        },
-      });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!!result) {
+        this.service
+          .create(result)
+          .pipe(finalize(() => {}))
+          .subscribe({
+            next: (value) => {
+              this.isLoading.set(false);
+              this.getlAllIngredients();
+            },
+          });
       }
     });
   }
 }
-

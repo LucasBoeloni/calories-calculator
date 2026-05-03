@@ -15,6 +15,8 @@ public class IngredientDto implements Serializable {
 
 	private Long id;
 
+	private Integer unit;
+
 	private String name;
 
 	private Double calorie;

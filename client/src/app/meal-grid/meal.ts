@@ -5,5 +5,6 @@ export interface Meal {
   userId : number;
   name : string;
   ingredients : MealIngredient[];
+  delete? : boolean;
 
 }

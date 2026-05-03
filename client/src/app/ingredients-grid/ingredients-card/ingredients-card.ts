@@ -7,16 +7,26 @@ import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { IngredientService } from '../ingredient-service';
 import { debounceTime, distinctUntilChanged, finalize } from 'rxjs';
+import { MatSelectModule } from '@angular/material/select';
+import { UNITS } from '../../constants';
 
 @Component({
   selector: 'app-ingredients-card',
-  imports: [MatCardModule, MatInputModule, ReactiveFormsModule, MatIcon, MatButtonModule],
+  imports: [
+    MatCardModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatIcon,
+    MatButtonModule,
+    MatSelectModule,
+  ],
   templateUrl: './ingredients-card.html',
   styleUrl: './ingredients-card.scss',
 })
 export class IngredientsCard implements OnInit {
   protected formGroup = new FormGroup({
     id: new FormControl(),
+    unit: new FormControl(),
     name: new FormControl(),
     calorie: new FormControl(),
     carbohydrate: new FormControl(),
@@ -31,14 +41,13 @@ export class IngredientsCard implements OnInit {
   ingredient = input<Ingredient>();
   newIngredient = output<Ingredient>();
   private service = inject(IngredientService);
+  public unidades = UNITS;
 
-  constructor() {
-
-  }
+  constructor() {}
 
   ngOnInit(): void {
-        if (!!this.ingredient())  {
-          this.formGroup.setValue(this.ingredient() as Ingredient);
+    if (!!this.ingredient()) {
+      this.formGroup.setValue(this.ingredient() as Ingredient);
       this.formGroup.valueChanges
         .pipe(debounceTime(2000), distinctUntilChanged())
         .subscribe((e) => {
@@ -56,7 +65,4 @@ export class IngredientsCard implements OnInit {
     }
   }
 
-  test() {
-    console.log(this.formGroup.getRawValue());
-  }
 }

@@ -11,6 +11,5 @@ export interface MealIngredient {
   fat : number;
   fiber : number;
   sodium : number;
-  deleted: boolean;
-
+  save?: boolean;
 }

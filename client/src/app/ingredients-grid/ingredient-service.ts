@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { Ingredient } from './ingredient';
 import { Observable } from 'rxjs';
 
@@ -16,4 +16,5 @@ export class IngredientService {
   public create(entity: Ingredient) : Observable<Ingredient[]>{
     return this.httpClient.post<Ingredient[]>(`api/ingredient`, entity);
   }
+
 }

@@ -35,15 +35,11 @@ public class MealIngredient implements Serializable {
 	@JoinColumn(name = "id_ingredient")
 	private Ingredient ingredient;
 
-	@Column(name = "unit")
-	private int unit;
-
 	@Column(name = "quantity")
 	private Double quantity;
 
-	public MealIngredient(Long mealId, Long ingredientId, Double quantity, int unit){
+	public MealIngredient(Long mealId, Long ingredientId, Double quantity){
 		this.id = new MealIngredientId(mealId, ingredientId);
-		this.unit = unit;
 		Meal meal =new Meal();
 		meal.setId(mealId);
 		this.meal = meal;

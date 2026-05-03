@@ -1,0 +1,76 @@
+<mat-divider></mat-divider>
+
+<div class="meal-row">
+  <div  style="width: 20%" class="meal-colum">
+    @if (editing().ingredient !== getIngredientEditId(ingredientState())) {
+      <span (click)="startEditIngredient(ingredientState())" >
+        {{ ingredientState().name }}
+      </span>
+    } @else {
+      <input
+        #inputIngredient
+        type="text"
+        aria-label="Number"
+        matInput
+        style="width: 90%"
+        [(ngModel)]="searchTerm"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete
+        (closed)="clearEditing()"
+        (optionSelected)="newIngredientSelected($event)"
+        #auto="matAutocomplete"
+      >
+        @if (filteredIngredients().length === 0) {
+          <mat-option [value]="null" >Ingrediente Não encontrado</mat-option>
+        }
+        @for (ingredientSelect of filteredIngredients(); track ingredientSelect.id) {
+          <mat-option [value]="ingredientSelect">{{ ingredientSelect.name }}</mat-option>
+        }
+      </mat-autocomplete>
+    }
+  </div>
+  <div style="width: 9%" class="meal-colum">
+    @if (editing().quantity != getIngredientEditId(ingredient)) {
+      <span (click)="startEditQuantity(ingredient)">
+        {{ quantityState()  + (ingredientState().unit === 1 ? 'g' : 'un')}}
+      </span>
+    } @else {
+      <input
+        #inputQuantity
+        (blur)="finishEditQuantity()"
+        style="width: 90%"
+        matInput
+        type="number"
+        [(ngModel)]="quantityState"
+        (ngModelChange)="emitIngredient()"
+      />
+    }
+  </div>
+  <div style="width: 9%" class="meal-colum">
+    {{ calorieComputed() | number: '1.1-1' }}
+  </div>
+  <div style="width: 9%" class="meal-colum">
+    {{ proteinComputed() | number: '1.1-1' }}
+  </div>
+  <div style="width: 9%" class="meal-colum">
+    {{ carbohydrateComputed() | number: '1.1-1' }}
+  </div>
+  <div style="width: 9%" class="meal-colum">
+    {{ sugarComputed() | number: '1.1-1' }}
+  </div>
+  <div style="width: 9%" class="meal-colum">
+    {{ fatComputed() | number: '1.1-1' }}
+  </div>
+  <div style="width: 9%" class="meal-colum">
+    {{ fiberComputed() | number: '1.1-1' }}
+  </div>
+  <div style="width: 9%" class="meal-colum">
+    {{ sodiumComputed() | number: '1.1-1' }}
+  </div>
+  <div style="width: 8%; text-align: center" class="meal-colum">
+    <button (click)="deleteRow()" matTooltip="Sua dieta" matIconButton aria-label="diet">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>

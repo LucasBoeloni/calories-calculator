@@ -14,13 +14,10 @@ import java.util.Optional;
 @Repository
 public interface MealRepository extends JpaRepository<Meal, Long> {
 
-	Optional<Meal> findByIdAndDeletedIsFalse(Long id);
-
-	@Query("SELECT m.id " +
+	@Query("SELECT m " +
 			" FROM Meal m " +
 			" WHERE m.user.id = :id ")
-	List<Long> findAllIdsByUser(@Param("id") Long id);
-
+	List<Meal> findAllByUserId(@Param("id") Long id);
 
 
 }

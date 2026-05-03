@@ -37,8 +37,8 @@ public class MealService {
 
 
 	public List<MealIngredientMealDto> findAllMealIngredientFromUser(Long userId) {
-		List<Long> meals = repository.findAllIdsByUser(userId);
-		List<MealIngredient> mealIngredients = mealIngredientRepository.findAllByMealIdIn(meals);
+		List<Meal> meals = repository.findAllByUserId(userId);
+		List<MealIngredient> mealIngredients = mealIngredientRepository.findAllByMealIdIn(meals.stream().map(Meal::getId).toList());
 
 		Map<Long, MealIngredientMealDto> map = new LinkedHashMap<>();
 
@@ -57,11 +57,21 @@ public class MealService {
 
 			MealIngredientIngredientDto ingredientDto = mealIngredientIngredientMapper.toDto(mealIngredient.getIngredient());
 			ingredientDto.setMealId(mealId);
-			ingredientDto.setUnit(mealIngredient.getUnit());
 			ingredientDto.setQuantity(mealIngredient.getQuantity());
 
 			mealDto.getIngredients().add(ingredientDto);
 		}
+		for (Meal meal : meals) {
+			map.computeIfAbsent(meal.getId(), id -> {
+				MealIngredientMealDto dto = new MealIngredientMealDto();
+				dto.setMealId(id);
+				dto.setUserId(userId);
+				dto.setName(meal.getName());
+				dto.setIngredients(new ArrayList<>());
+				return dto;
+			});
+		}
+
 
 		return new ArrayList<>(map.values());
 	}
@@ -71,7 +81,7 @@ public class MealService {
 	}
 
 	private Meal findEntityById(Long id) {
-		return repository.findByIdAndDeletedIsFalse(id)
+		return repository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException("not found"));
 	}
 
@@ -82,7 +92,7 @@ public class MealService {
 		Long savedId = savedEntity.getId();
 		List<MealIngredient> mealIngredients = new ArrayList<>();
 		dto.getIngredients().forEach(ingredient -> {
-			mealIngredients.add(new MealIngredient(savedId, ingredient.getIngredientId(),ingredient.getQuantity(), ingredient.getUnit()));
+			mealIngredients.add(new MealIngredient(savedId, ingredient.getIngredientId(),ingredient.getQuantity()));
 		});
 		mealIngredientRepository.deleteAllByMealId(savedId);
 		mealIngredientRepository.saveAll(mealIngredients);
@@ -93,8 +103,8 @@ public class MealService {
 	@Transactional
 	public void deleteById(Long id) {
 		Meal entity = findEntityById(id);
-		entity.setDeleted(Boolean.TRUE);
-		repository.save(entity);
+		mealIngredientRepository.deleteAllByMealId(id);
+		repository.delete(entity);
 	}
 
 }
