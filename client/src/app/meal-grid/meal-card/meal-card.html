@@ -82,10 +82,11 @@
       <app-meal-row
         [ingredient]="ingredient"
         (ingredientChange)="onChangeIngredient($event, i)"
-        [ingredients]="filteredIngredients()"
+        [(ingredients)]="ingredientsState"
         (onDelete)="deleteIngredient(i)"
       />
     }
+        <mat-divider></mat-divider>
         <button (click)="pushNewIngredient()" matTooltip="Sua dieta" matIconButton aria-label="diet">
       <mat-icon>add</mat-icon>
     </button>

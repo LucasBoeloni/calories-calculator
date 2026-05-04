@@ -35,6 +35,7 @@ export class MealRow implements OnInit {
   public ingredientChange = output<MealIngredient>();
   public ingredientState = signal<MealIngredient>(null);
   public ingredients = input<Ingredient[]>([]);
+  public ingredientsChange = output<Ingredient[]>();
 
   protected quantityState = signal<number>(0);
   protected calorieState = signal<number>(0);
@@ -44,6 +45,7 @@ export class MealRow implements OnInit {
   protected fatState = signal<number>(0);
   protected fiberState = signal<number>(0);
   protected sodiumState = signal<number>(0);
+  protected initialQuantity = 0;
 
   protected searchTerm = signal('');
 
@@ -83,23 +85,22 @@ export class MealRow implements OnInit {
     const term = this.searchTerm().toLocaleLowerCase().trim();
     if (!term) return this.ingredients();
 
-    return this.ingredients().filter((ingredient) =>
-      ingredient.name.toLocaleLowerCase().includes(term) && ingredient.id,
+    return this.ingredients().filter(
+      (ingredient) => ingredient.name.toLocaleLowerCase().includes(term) && ingredient.id,
     );
   });
-
-
 
   ngOnInit(): void {
     this.ingredientState.set(this.ingredient());
     this.buildStates();
     this.emitIngredient(false);
-    if(this.ingredientState().ingredientId === null){
+    if (this.ingredientState().ingredientId === null) {
       this.startEditIngredient(this.ingredient());
     }
   }
 
   startEditQuantity(ingredient) {
+    this.initialQuantity = this.quantityState();
     this.editing.set({
       ingredient: null,
       quantity: this.getIngredientEditId(ingredient),
@@ -127,7 +128,7 @@ export class MealRow implements OnInit {
   }
 
   newIngredientSelected(selected) {
-    if(!selected.option.value) return
+    if (!selected.option.value) return;
     const selectedValue = selected.option.value;
 
     this.ingredientState.set({
@@ -137,6 +138,8 @@ export class MealRow implements OnInit {
       quantity: selectedValue.unit === 1 ? 100 : 1,
     });
 
+    this.ingredientsChange.emit(this.ingredients().filter((a) => a.id !== selectedValue.id));
+
     this.buildStates();
 
     this.emitIngredient(true);
@@ -144,25 +147,44 @@ export class MealRow implements OnInit {
     this.clearEditing();
   }
 
-  finishEditQuantity(){
-
+  finishEditQuantity() {
     this.clearEditing();
-
+    if (this.quantityState() === null || 0 || undefined) {
+      this.quantityState.set(this.initialQuantity);
+      return;
+    }
     this.emitIngredient(true);
   }
 
   clearEditing() {
     this.editing.set({ ingredient: null, quantity: null });
-    if(this.ingredientState().ingredientId === null){
+    if (this.ingredientState().ingredientId === null) {
       this.deleteRow();
     }
   }
 
   deleteRow() {
+    if (!!this.ingredientState().name) {
+      this.ingredients().push({
+        calorie: this.calorieComputed(),
+        protein: this.proteinComputed(),
+        carbohydrate: this.carbohydrateComputed(),
+        sugar: this.sugarComputed(),
+        fat: this.fatComputed(),
+        fiber: this.fiberComputed(),
+        sodium: this.sodiumComputed(),
+        id: this.ingredientState().ingredientId,
+        unit: this.ingredientState().unit,
+        name: this.ingredientState().name,
+        deleted: false,
+      });
+      this.ingredientsChange.emit(this.ingredients());
+    }
+
     this.onDelete.emit();
   }
 
-  buildStates(){
+  buildStates() {
     this.quantityState.set(this.ingredientState().quantity);
     this.calorieState.set(this.ingredientState().calorie);
     this.proteinState.set(this.ingredientState().protein);
@@ -173,21 +195,21 @@ export class MealRow implements OnInit {
     this.sodiumState.set(this.ingredientState().sodium);
   }
 
-  emitIngredient(save = false){
+  emitIngredient(save = false) {
     this.ingredientChange.emit({
-      calorie : this.calorieComputed(),
-      quantity : this.quantityState(),
-      protein : this.proteinComputed(),
-      carbohydrate : this.carbohydrateComputed(),
-      sugar : this.sugarComputed(),
-      fat : this.fatComputed(),
-      fiber : this.fiberComputed(),
-      sodium : this.sodiumComputed(),
-      mealId : this.ingredientState().mealId,
-      ingredientId : this.ingredientState().ingredientId,
-      unit : this.ingredientState().unit,
-      name : this.ingredientState().name,
-      save : save
+      calorie: this.calorieComputed(),
+      quantity: this.quantityState(),
+      protein: this.proteinComputed(),
+      carbohydrate: this.carbohydrateComputed(),
+      sugar: this.sugarComputed(),
+      fat: this.fatComputed(),
+      fiber: this.fiberComputed(),
+      sodium: this.sodiumComputed(),
+      mealId: this.ingredientState().mealId,
+      ingredientId: this.ingredientState().ingredientId,
+      unit: this.ingredientState().unit,
+      name: this.ingredientState().name,
+      save: save,
     });
   }
 }

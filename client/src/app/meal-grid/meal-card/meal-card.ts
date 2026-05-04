@@ -39,7 +39,6 @@ export class MealCard implements OnInit {
   public meal = input<Meal>(null);
 
   public ingredients = input<Ingredient[]>([]);
-  public ingredientsChange = output<Ingredient[]>();
   public ingredientsState = signal<Ingredient[]>([]);
 
   protected editing = signal(false);
@@ -48,11 +47,10 @@ export class MealCard implements OnInit {
 
   public mealIngredientsState = signal<MealIngredient[]>([]);
 
+  public updatedTotals = output<any>();
+
   protected filteredIngredients = computed(() => {
-    const ids = this.mealIngredientsState().map(a => a.ingredientId);
-    return this.ingredients().filter(
-      (ingredient) => !ids.includes(ingredient.id),
-    );
+
   });
 
   totals = signal<any>({});
@@ -61,6 +59,10 @@ export class MealCard implements OnInit {
 
   ngOnInit(): void {
     this.mealIngredientsState.set(structuredClone(this.meal().ingredients));
+        const ids = this.mealIngredientsState().map(a => a.ingredientId);
+    this.ingredientsState.set(this.ingredients().filter(
+      (ingredient) => !ids.includes(ingredient.id),
+    ))
   }
 
   deleteMeal() {
@@ -85,7 +87,6 @@ export class MealCard implements OnInit {
       this.meal().ingredients[index] = ingredient;
     }
     this.mealIngredientsState()[index] = ingredient;
-    this.ingredientsChange.emit(this.filteredIngredients())
     this.updateTotals();
     if (ingredient.save) {
       this.emitMeal();
@@ -95,6 +96,8 @@ export class MealCard implements OnInit {
   updateTotals() {
     const reduced = this.mealIngredientsState().reduce(
       (acc, i) => {
+        acc.ingredientId = i.ingredientId;
+        acc.mealId = i.mealId;
         acc.calorie += i.calorie;
         acc.protein += i.protein;
         acc.carbohydrate += i.carbohydrate;
@@ -112,9 +115,12 @@ export class MealCard implements OnInit {
         fat: 0,
         fiber: 0,
         sodium: 0,
+        ingredientId : 0,
+        mealId : 0
       },
     );
     this.totals.set(reduced);
+    this.updatedTotals.emit(reduced);
   }
 
   startEdit() {

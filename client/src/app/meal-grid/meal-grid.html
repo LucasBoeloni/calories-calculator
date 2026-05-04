@@ -1,14 +1,23 @@
 <mat-card class="ingredients-card">
-    @if (isLoading()) {
-      <mat-spinner></mat-spinner>
-    }
-  <div class="grid">
-  @for (meal of meals(); track meal.mealId) {
-    <app-meal-card [meal]="meal" (mealChange)="onMealChange($event)" [(ingredients)]="ingredients" />
+  <mat-card-header>
+    <mat-card-title>
+      {{ totals().calorie }}
+    </mat-card-title>
+  </mat-card-header>
+  @if (isLoading()) {
+    <mat-spinner></mat-spinner>
   }
-        <button (click)="pushNewMeal()" matTooltip="Sua dieta" matIconButton aria-label="diet">
+  <div class="grid">
+    @for (meal of meals(); let i = $index; track meal.mealId) {
+      <app-meal-card
+        [meal]="meal"
+        (mealChange)="onMealChange($event)"
+        [ingredients]="ingredients()"
+        (updatedTotals)="updatedTotals($event)"
+      />
+    }
+    <button (click)="pushNewMeal()" matTooltip="Sua dieta" matIconButton aria-label="diet">
       <mat-icon>add</mat-icon>
     </button>
   </div>
-
-  </mat-card>
+</mat-card>
