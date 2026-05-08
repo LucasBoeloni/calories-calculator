@@ -10,4 +10,12 @@ import { Header } from './header/header';
 })
 export class App {
   protected readonly title = signal('client');
+  protected userChanged = signal(false);
+
+  onUserChanged(){
+    this.userChanged.update( user => !user)
+    setTimeout(() => {
+    this.userChanged.update( user => !user)
+    });
+  }
 }

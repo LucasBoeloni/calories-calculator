@@ -49,10 +49,6 @@ export class MealCard implements OnInit {
 
   public updatedTotals = output<any>();
 
-  protected filteredIngredients = computed(() => {
-
-  });
-
   totals = signal<any>({});
 
   constructor() {}
@@ -142,7 +138,7 @@ export class MealCard implements OnInit {
   pushNewIngredient() {
     this.meal().ingredients.push({
       calorie: null,
-      quantity: null,
+      quantity: 0,
       protein: null,
       carbohydrate: null,
       sugar: null,

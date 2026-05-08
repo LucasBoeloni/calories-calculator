@@ -1,7 +1,10 @@
-<app-header/>
+<app-header (userChanged)="onUserChanged()" />
 
 <main class="page" >
 
+  @if (!userChanged()) {
 <router-outlet />
+
+  }
 
 </main>

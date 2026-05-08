@@ -11,6 +11,15 @@
 			<column name="name" type="varchar(200)">
 				<constraints nullable="false"></constraints>
 			</column>
+			<column name="weight" type="double precision">
+				<constraints nullable="true"></constraints>
+			</column>
+			<column name="mode" type="int">
+				<constraints nullable="true"></constraints>
+			</column>
+			<column name="value" type="double precision">
+				<constraints nullable="true"></constraints>
+			</column>
 		</createTable>
 	</changeSet>
 

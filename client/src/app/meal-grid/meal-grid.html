@@ -1,8 +1,41 @@
 <mat-card class="ingredients-card">
   <mat-card-header>
-    <mat-card-title>
-      {{ totals().calorie }}
-    </mat-card-title>
+    <div class="infos">
+      <div class="config">
+        <mat-radio-group (change)="attUser()" [(ngModel)]="userMode" class="flex">
+          @for (mode of modes; track mode.id) {
+            <mat-radio-button class="example-radio-button" [value]="mode">{{
+              mode.label
+            }}</mat-radio-button>
+          }
+        </mat-radio-group>
+        <div class="user-info">
+          <mat-form-field appearance="outline" class="peso">
+            <mat-label>Peso</mat-label>
+            <input (blur)="attUser()" matInput type="number" [(ngModel)]="userWeight" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="value">
+            <mat-label>{{ userMode().label }}</mat-label>
+            <input
+              [disabled]="disabledUserValue()"
+              (blur)="attUser()"
+              matInput
+              type="number"
+              [(ngModel)]="userValue"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="macro-info">
+          <span>Calorias : {{ totals().calorie | number: '1.1-1' }} / {{ calculatedCalories() | number: '1.1-1' }}</span>
+          <span>Proteinas : {{ totals().protein }} / {{calculatedProteins() | number: '1.1-1'}}</span>
+          <span>Carboidratos : {{ totals().carbohydrate | number: '1.1-1' }}</span>
+          <span>Açucares : {{ totals().sugar | number: '1.1-1' }}</span>
+          <span>Gorduras : {{ totals().fat | number: '1.1-1' }}</span>
+          <span>Fibras : {{ totals().fiber | number: '1.1-1' }}</span>
+          <span>Sódio : {{ totals().sodium | number: '1.1-1' }}</span>
+      </div>
+    </div>
   </mat-card-header>
   @if (isLoading()) {
     <mat-spinner></mat-spinner>
@@ -16,7 +49,7 @@
         (updatedTotals)="updatedTotals($event)"
       />
     }
-    <button (click)="pushNewMeal()" matTooltip="Sua dieta" matIconButton aria-label="diet">
+    <button (click)="pushNewMeal()" matTooltip="Sua dieta" matMiniFab aria-label="diet">
       <mat-icon>add</mat-icon>
     </button>
   </div>

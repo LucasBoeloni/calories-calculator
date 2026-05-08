@@ -11,7 +11,7 @@ export class MealService {
     private httpClient = inject(HttpClient)
 
   public getAll() : Observable<any[]>{
-    return this.httpClient.get<any[]>(`api/meal/from-user/${1}`)
+    return this.httpClient.get<any[]>(`api/meal/from-user/${JSON.parse(localStorage.getItem('selectedUser')).id}`)
   }
 
   public updateMeal(meal) : Observable<Meal>{

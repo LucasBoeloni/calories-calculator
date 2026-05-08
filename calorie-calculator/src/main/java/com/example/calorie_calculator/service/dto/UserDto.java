@@ -29,4 +29,10 @@ public class UserDto implements Serializable {
 
 	private String name;
 
+	private Double weight;
+
+	private Integer mode;
+
+	private Double value;
+
 }

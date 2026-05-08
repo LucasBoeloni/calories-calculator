@@ -4,4 +4,53 @@
 
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  gap: 16px;
+  font-size: smaller;
+}
 
+.user-info {
+  display: grid;
+  grid-template-columns: 140px auto;
+  align-items: center;
+  gap: 24px;
+  align-items: self-end;
+}
+
+.config {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 6px;
+}
+
+.value {
+  width: 120px;
+}
+
+.flex {
+  display: flex;
+}
+
+::ng-deep .mat-mdc-radio-button {
+  transform: scale(0.85);
+}
+
+::ng-deep .mat-mdc-radio-button .mdc-label {
+  font-size: 13px;
+}
+
+.infos {
+  display: flex;
+  gap: 30px
+}
+
+.totals-table{
+  gap: 16px
+}
+
+.macro-info{
+      display: grid;
+    grid-template-columns: 200px auto;
+}

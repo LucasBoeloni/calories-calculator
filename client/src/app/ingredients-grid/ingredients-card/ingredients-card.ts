@@ -65,4 +65,8 @@ export class IngredientsCard implements OnInit {
     }
   }
 
+  deleteIngredient(){
+
+  }
+
 }

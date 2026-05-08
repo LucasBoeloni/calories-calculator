@@ -37,6 +37,15 @@ public class User implements Serializable {
 	@Column(name = "name", nullable = false)
 	private String name;
 
+	@Column(name = "weight")
+	private Double weight;
+
+	@Column(name = "mode")
+	private Integer mode;
+
+	@Column(name = "value")
+	private Double value;
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private List<Meal> meals = new ArrayList<>();
 

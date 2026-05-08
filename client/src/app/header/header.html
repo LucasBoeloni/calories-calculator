@@ -3,21 +3,25 @@
   <button matTooltip="Sua dieta" matIconButton aria-label="diet" (click)="navigate('meal-grid')">
     <mat-icon>text_snippet</mat-icon>
   </button>
-  <button matTooltip="ingredientes" matIconButton aria-label="ingredients" (click)="navigate('ingredient-grid')">
+  <button
+    matTooltip="ingredientes"
+    matIconButton
+    aria-label="ingredients"
+    (click)="navigate('ingredient-grid')"
+  >
     <mat-icon>shopping_basket</mat-icon>
   </button>
   <span class="spacer"></span>
 
-  @if(isLoading()){
-      <mat-spinner diameter="30" ></mat-spinner>
-  }@else {
-<mat-form-field>
-    <mat-select>
-      @for (user of users(); track user) {
-        <mat-option [value]="user.id">{{ user.name }}</mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
+  @if (isLoading()) {
+    <mat-spinner diameter="30"></mat-spinner>
+  } @else {
+    <mat-form-field appearance="outline">
+      <mat-select [(ngModel)]="selectedUser" (selectionChange)="onSelect()" >
+        @for (user of users(); track user) {
+          <mat-option [value]="user">{{ user.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
   }
-
 </mat-toolbar>
