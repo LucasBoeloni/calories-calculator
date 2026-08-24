@@ -10,11 +10,11 @@ export class IngredientService {
     private httpClient = inject(HttpClient)
 
   public getAll() : Observable<Ingredient[]>{
-    return this.httpClient.get<Ingredient[]>(`api/ingredient`)
+    return this.httpClient.get<Ingredient[]>(`/api/ingredient`)
   }
 
   public create(entity: Ingredient) : Observable<Ingredient[]>{
-    return this.httpClient.post<Ingredient[]>(`api/ingredient`, entity);
+    return this.httpClient.post<Ingredient[]>(`/api/ingredient`, entity);
   }
 
 }

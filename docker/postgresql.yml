@@ -1,17 +1,23 @@
 services:
-
   database:
     container_name: postgres_container
     image: postgres:17
+
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: calories
+
     ports:
       - "5432:5432"
+
     volumes:
       - calories-postgres-data:/var/lib/postgresql/data
+
     restart: unless-stopped
 
-volumes:
-  calories-postgres-data:
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d calories"]
+      interval: 5s
+      timeout: 5s
+      retries: 10

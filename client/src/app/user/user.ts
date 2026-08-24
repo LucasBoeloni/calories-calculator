@@ -11,11 +11,11 @@ export class User {
   private httpClient = inject(HttpClient)
 
   public getAll() : Observable<UserModel[]>{
-    return this.httpClient.get<UserModel[]>(`api/user`)
+    return this.httpClient.get<UserModel[]>(`/api/user`)
   }
 
   public save(user) : Observable<UserModel>{
-    return this.httpClient.post<UserModel>(`api/user`,user);
+    return this.httpClient.post<UserModel>(`/api/user`,user);
 
   }
 }

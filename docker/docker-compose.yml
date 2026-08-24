@@ -1,7 +1,30 @@
-version: '2.2'
-
 services:
+
   database:
     extends:
       file: postgresql.yml
       service: database
+
+  app:
+    container_name: calories_app
+
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.backend
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/calories
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+
+    depends_on:
+      database:
+        condition: service_healthy
+
+    restart: unless-stopped
+
+volumes:
+  calories-postgres-data:

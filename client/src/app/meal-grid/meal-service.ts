@@ -11,15 +11,15 @@ export class MealService {
     private httpClient = inject(HttpClient)
 
   public getAll() : Observable<any[]>{
-    return this.httpClient.get<any[]>(`api/meal/from-user/${JSON.parse(localStorage.getItem('selectedUser')).id}`)
+    return this.httpClient.get<any[]>(`/api/meal/from-user/${JSON.parse(localStorage.getItem('selectedUser')).id}`)
   }
 
   public updateMeal(meal) : Observable<Meal>{
-    return this.httpClient.post<Meal>(`api/meal`,meal)
+    return this.httpClient.post<Meal>(`/api/meal`,meal)
   }
 
     public delete(id) : Observable<Meal>{
-    return this.httpClient.delete<Meal>(`api/meal/${id}`)
+    return this.httpClient.delete<Meal>(`/api/meal/${id}`)
   }
 
 }
